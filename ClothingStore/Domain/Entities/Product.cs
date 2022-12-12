@@ -12,5 +12,6 @@ namespace ClothingStore.Domain.Entities
         [ForeignKey("BrandId")]
         public int Count { get; set; }
         public float Price { get; set; }
+        public string? TitleImagePath { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClothingStore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221206193225_InitialCreate")]
+    [Migration("20221212164512_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -35,6 +35,9 @@ namespace ClothingStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -179,6 +182,9 @@ namespace ClothingStore.Migrations
                     b.Property<Guid>("SizeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("TitleImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OnlineOrderId");
@@ -190,16 +196,17 @@ namespace ClothingStore.Migrations
                         {
                             Id = new Guid("aef66f8c-f6c5-4f4a-abf2-b31b89c25b51"),
                             BrandId = new Guid("7efc9710-ed9f-460c-b29f-617a4a784269"),
-                            Count = 1,
-                            Name = "Хлопковая сорочка",
+                            Count = 9,
+                            Name = "Хлопковая сорочкаавава",
                             Price = 29100f,
-                            SizeId = new Guid("74923a8e-621d-4d5a-8980-5985a3983d31")
+                            SizeId = new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"),
+                            TitleImagePath = "Products/Ralph Lauren/Shirts/1.jpg"
                         },
                         new
                         {
                             Id = new Guid("93a85753-c130-455f-83ec-6a90d3970d72"),
                             BrandId = new Guid("4d89fc13-6268-464f-8ecf-57acc7427b64"),
-                            Count = 5,
+                            Count = 0,
                             Name = "Куртка",
                             Price = 30000f,
                             SizeId = new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff")
@@ -208,7 +215,7 @@ namespace ClothingStore.Migrations
                         {
                             Id = new Guid("80cee191-9b30-4830-9f9f-58cb88057b96"),
                             BrandId = new Guid("457966e8-26e4-489b-978a-f903a07d3533"),
-                            Count = 8,
+                            Count = 0,
                             Name = "Мужские брюки Sport Fleece Tennis",
                             Price = 12690f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1")
@@ -217,7 +224,7 @@ namespace ClothingStore.Migrations
                         {
                             Id = new Guid("16179e73-8390-432a-8b7c-be073ab6dc12"),
                             BrandId = new Guid("e3927a70-e055-4e6c-a4fa-e10308a78a7d"),
-                            Count = 4,
+                            Count = 6,
                             Name = "Футболка мужская",
                             Price = 4470f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1")
@@ -226,7 +233,7 @@ namespace ClothingStore.Migrations
                         {
                             Id = new Guid("d6d60425-d2fd-4f8b-8e1b-f7c9def4a7ac"),
                             BrandId = new Guid("f0e9fd9d-67fe-4f99-ace4-7b403c57ab46"),
-                            Count = 1,
+                            Count = 5,
                             Name = "Мужская олимпийка Adicolor Classics Beckenbauer Primeblue",
                             Price = 7690f,
                             SizeId = new Guid("e3437214-5c5c-411b-84ca-9015f4804e74")

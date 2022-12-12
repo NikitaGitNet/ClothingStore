@@ -13,6 +13,10 @@ namespace ClothingStore.Controllers
         }
         public IActionResult Index()
         {
+            return View();
+        }
+        public IActionResult Product()
+        {
             List<ProductViewModel> productsViewModels = new();
             var products = _context.Products.ToList();
             foreach (var product in products)
@@ -26,6 +30,10 @@ namespace ClothingStore.Controllers
                 productsViewModels.Add(model);
             }
             return View(new ProductListViewModel { Products = productsViewModels });
+        }
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.TagHelpers;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddMvc();
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 
 var app = builder.Build();

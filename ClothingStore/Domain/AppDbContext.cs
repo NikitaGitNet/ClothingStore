@@ -8,13 +8,13 @@ namespace ClothingStore.Domain
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<OnlineOrder> OnlineOrders { get; set; }
-        public DbSet<Sale> Sales { get; set; }
-        public DbSet<Size> Sizes { get; set; }
+        public DbSet<Product>? Products { get; set; }
+        public DbSet<Brand>? Brands { get; set; }
+        public DbSet<Customer>? Customers { get; set; }
+        public DbSet<Employee>? Employees { get; set; }
+        public DbSet<OnlineOrder>? OnlineOrders { get; set; }
+        public DbSet<Sale>? Sales { get; set; }
+        public DbSet<Size>? Sizes { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -100,10 +100,11 @@ namespace ClothingStore.Domain
             {
                 Id = new Guid("aef66f8c-f6c5-4f4a-abf2-b31b89c25b51"),
                 Count = new Random().Next(10),
-                Name = "Хлопковая сорочка",
+                Name = "Хлопковая сорочкаавава",
                 BrandId = new Guid(RalphLaurenTest.Id),
                 SizeId = new Guid(SizeL.Id),
-                Price = 29100
+                Price = 29100,
+                TitleImagePath = "Products/Ralph Lauren/Shirts/1.jpg"
             },
             new Product
             {
