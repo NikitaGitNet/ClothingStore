@@ -20,6 +20,7 @@ namespace ClothingStore.Domain
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             builder.Entity<Size>().HasData(new Size
             {
                 Id = new Guid(SizeXS.Id),
@@ -68,36 +69,43 @@ namespace ClothingStore.Domain
                 WaistCircumference = SizeXXL.WaistCircumference,
                 HipCircumference = SizeXXL.HipCircumference
             });
+
             builder.Entity<Brand>().HasData(new Brand
             {
                 Id = new Guid(NikeTest.Id),
                 Name = NikeTest.Name,
-                ManufacturerCountry = NikeTest.ManufacturerCountry
+                ManufacturerCountry = NikeTest.ManufacturerCountry,
+                TitleImagePath = "Brands/2.png"
             },
             new Brand
             {
                 Id = new Guid(AdidasTest.Id),
                 Name = AdidasTest.Name,
-                ManufacturerCountry = AdidasTest.ManufacturerCountry
+                ManufacturerCountry = AdidasTest.ManufacturerCountry,
+                TitleImagePath = "Brands/3.png"
             },
             new Brand
             {
                 Id = new Guid(RalphLaurenTest.Id),
                 Name = RalphLaurenTest.Name,
-                ManufacturerCountry = RalphLaurenTest.ManufacturerCountry
+                ManufacturerCountry = RalphLaurenTest.ManufacturerCountry,
+                TitleImagePath = "Brands/3.png"
             },
             new Brand
             {
                 Id = new Guid(StoneIslandTest.Id),
                 Name = StoneIslandTest.Name,
-                ManufacturerCountry = StoneIslandTest.ManufacturerCountry
+                ManufacturerCountry = StoneIslandTest.ManufacturerCountry,
+                TitleImagePath = "Brands/5.png"
             },
             new Brand
             {
                 Id = new Guid(LacosteTest.Id),
                 Name = LacosteTest.Name,
-                ManufacturerCountry = LacosteTest.ManufacturerCountry
+                ManufacturerCountry = LacosteTest.ManufacturerCountry,
+                TitleImagePath = "Brands/4.jpg"
             });
+
             builder.Entity<ClothingType>().HasData(new ClothingType 
             { 
                 Id = Shirt.Id,
@@ -123,6 +131,7 @@ namespace ClothingStore.Domain
                 Id = Blouse.Id,
                 Name = Blouse.Name,
             });
+
             builder.Entity<Product>().HasData(new Product
             {
                 Id = new Guid("aef66f8c-f6c5-4f4a-abf2-b31b89c25b51"),
