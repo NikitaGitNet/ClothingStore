@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ClothingStore.Domain;
 using ClothingStore.Domain.Entities;
+using ClothingStore.Model.Products;
 
 namespace ClothingStore.Controllers
 {
@@ -20,7 +21,22 @@ namespace ClothingStore.Controllers
         }
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Products.ToListAsync());
+            IEnumerable<Product> products = _context.Products.ToList();
+            List<ProductViewModel> viewModels = new();
+            foreach (Product product in products)
+            {
+                ProductViewModel model = new()
+                { 
+                    Id = product.Id,
+                    Count = product.Count,
+                    Name = product.Name,
+                    TitleImagePath = product.TitleImagePath,
+                    Brand = product.BrandName,
+                    ClothingType = product.ClothingTypeName
+                };
+                viewModels.Add(model);
+            }
+            return View(new ProductListViewModel {Products = viewModels});
         }
         public async Task<IActionResult> Details(Guid? id)
         {

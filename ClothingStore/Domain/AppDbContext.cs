@@ -1,5 +1,6 @@
 ﻿using ClothingStore.Domain.Entities;
 using ClothingStore.TestData.Brands;
+using ClothingStore.TestData.ClothingTypes;
 using ClothingStore.TestData.Sizes;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ namespace ClothingStore.Domain
         public DbSet<OnlineOrder>? OnlineOrders { get; set; }
         public DbSet<Sale>? Sales { get; set; }
         public DbSet<Size>? Sizes { get; set; }
+        public DbSet<ClothingType>? ClothingTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -96,15 +98,44 @@ namespace ClothingStore.Domain
                 Name = LacosteTest.Name,
                 ManufacturerCountry = LacosteTest.ManufacturerCountry
             });
+            builder.Entity<ClothingType>().HasData(new ClothingType 
+            { 
+                Id = Shirt.Id,
+                Name = Shirt.Name
+            },
+            new ClothingType 
+            { 
+                Id = Jacket.Id,
+                Name= Jacket.Name,
+            },
+            new ClothingType 
+            { 
+                Id = Pants.Id,
+                Name = Pants.Name
+            },
+            new ClothingType 
+            { 
+                Id = Sweater.Id,
+                Name = Sweater.Name
+            },
+            new ClothingType 
+            { 
+                Id = Blouse.Id,
+                Name = Blouse.Name,
+            });
             builder.Entity<Product>().HasData(new Product
             {
                 Id = new Guid("aef66f8c-f6c5-4f4a-abf2-b31b89c25b51"),
                 Count = new Random().Next(10),
-                Name = "Хлопковая сорочкаавава",
+                Name = "Хлопковая сорочка",
                 BrandId = new Guid(RalphLaurenTest.Id),
+                BrandName = RalphLaurenTest.Name,
                 SizeId = new Guid(SizeL.Id),
+                SizeName = SizeL.Name,
                 Price = 29100,
-                TitleImagePath = "Products/Ralph Lauren/Shirts/1.jpg"
+                TitleImagePath = "Products/Ralph Lauren/Shirt/1.jpg",
+                ClothingTypeName = Shirt.Name,
+                ClothingTypeId = Shirt.Id,
             },
             new Product
             {
@@ -112,8 +143,13 @@ namespace ClothingStore.Domain
                 Count = new Random().Next(10),
                 Name = "Куртка",
                 BrandId = new Guid(StoneIslandTest.Id),
+                BrandName = StoneIslandTest.Name,
                 SizeId = new Guid(SizeM.Id),
-                Price = 30000
+                SizeName = SizeM.Name,
+                Price = 30000,
+                TitleImagePath = "Products/Stone Island/Jacket/2.jpg",
+                ClothingTypeId = Jacket.Id,
+                ClothingTypeName = Jacket.Name
             },
             new Product
             {
@@ -121,26 +157,41 @@ namespace ClothingStore.Domain
                 Count = new Random().Next(10),
                 Name = "Мужские брюки Sport Fleece Tennis",
                 BrandId = new Guid(LacosteTest.Id),
+                BrandName = LacosteTest.Name,
                 SizeId = new Guid(SizeXL.Id),
-                Price = 12690
+                SizeName = SizeXL.Name,
+                Price = 12690,
+                TitleImagePath = "Products/Lacoste/Pants/3.jpg",
+                ClothingTypeId = Pants.Id,
+                ClothingTypeName = Pants.Name
             },
             new Product
             {
                 Id = new Guid("16179e73-8390-432a-8b7c-be073ab6dc12"),
                 Count = new Random().Next(10),
-                Name = "Футболка мужская",
+                Name = "Кофта мужская",
                 BrandId = new Guid(NikeTest.Id),
+                BrandName = NikeTest.Name,
                 SizeId = new Guid(SizeXL.Id),
-                Price = 4470
+                SizeName = SizeXL.Name,
+                Price = 4470,
+                ClothingTypeId = Blouse.Id,
+                ClothingTypeName = Blouse.Name,
+                TitleImagePath = "Products/Nike/Blouse/4.jpeg"
             },
             new Product
             {
                 Id = new Guid("d6d60425-d2fd-4f8b-8e1b-f7c9def4a7ac"),
                 Count = new Random().Next(10),
-                Name = "Мужская олимпийка Adicolor Classics Beckenbauer Primeblue",
+                Name = "Cвитер Adicolor Classics Beckenbauer Primeblue",
                 BrandId = new Guid(AdidasTest.Id),
+                BrandName = AdidasTest.Name,
                 SizeId = new Guid(SizeXXL.Id),
-                Price = 7690
+                SizeName = SizeXXL.Name,
+                Price = 7690,
+                ClothingTypeId = Sweater.Id,
+                ClothingTypeName = Sweater.Name,
+                TitleImagePath = "Products/Adidas/Sweater/5.jpeg"
             });
         }
     }

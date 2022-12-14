@@ -74,6 +74,47 @@ namespace ClothingStore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ClothingStore.Domain.Entities.ClothingType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClothingTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"),
+                            Name = "Shirt"
+                        },
+                        new
+                        {
+                            Id = new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"),
+                            Name = "Jacket"
+                        },
+                        new
+                        {
+                            Id = new Guid("726eb9ac-be00-4e75-b328-d732d433d432"),
+                            Name = "Pants"
+                        },
+                        new
+                        {
+                            Id = new Guid("a8080577-5efb-4339-867a-8ba2129ae766"),
+                            Name = "Sweater"
+                        },
+                        new
+                        {
+                            Id = new Guid("da3a3156-3593-4f37-a89d-293e126915c6"),
+                            Name = "Blouse"
+                        });
+                });
+
             modelBuilder.Entity("ClothingStore.Domain.Entities.Customer", b =>
                 {
                     b.Property<Guid>("Id")
@@ -164,6 +205,15 @@ namespace ClothingStore.Migrations
                     b.Property<Guid>("BrandId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("BrandName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ClothingTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ClothingTypeName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -179,12 +229,21 @@ namespace ClothingStore.Migrations
                     b.Property<Guid>("SizeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("SizeName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TitleImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("ClothingTypeId");
+
                     b.HasIndex("OnlineOrderId");
+
+                    b.HasIndex("SizeId");
 
                     b.ToTable("Products");
 
@@ -193,47 +252,71 @@ namespace ClothingStore.Migrations
                         {
                             Id = new Guid("aef66f8c-f6c5-4f4a-abf2-b31b89c25b51"),
                             BrandId = new Guid("7efc9710-ed9f-460c-b29f-617a4a784269"),
-                            Count = 9,
-                            Name = "Хлопковая сорочкаавава",
+                            BrandName = "Ralph Lauren",
+                            ClothingTypeId = new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"),
+                            ClothingTypeName = "Shirt",
+                            Count = 0,
+                            Name = "Хлопковая сорочка",
                             Price = 29100f,
                             SizeId = new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"),
-                            TitleImagePath = "Products/Ralph Lauren/Shirts/1.jpg"
+                            SizeName = "50 (L)",
+                            TitleImagePath = "Products/Ralph Lauren/Shirt/1.jpg"
                         },
                         new
                         {
                             Id = new Guid("93a85753-c130-455f-83ec-6a90d3970d72"),
                             BrandId = new Guid("4d89fc13-6268-464f-8ecf-57acc7427b64"),
-                            Count = 0,
+                            BrandName = "Stone Island",
+                            ClothingTypeId = new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"),
+                            ClothingTypeName = "Jacket",
+                            Count = 8,
                             Name = "Куртка",
                             Price = 30000f,
-                            SizeId = new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff")
+                            SizeId = new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"),
+                            SizeName = "48 (M)",
+                            TitleImagePath = "Products/Stone Island/Jacket/2.jpg"
                         },
                         new
                         {
                             Id = new Guid("80cee191-9b30-4830-9f9f-58cb88057b96"),
                             BrandId = new Guid("457966e8-26e4-489b-978a-f903a07d3533"),
+                            BrandName = "Lacoste",
+                            ClothingTypeId = new Guid("726eb9ac-be00-4e75-b328-d732d433d432"),
+                            ClothingTypeName = "Pants",
                             Count = 0,
                             Name = "Мужские брюки Sport Fleece Tennis",
                             Price = 12690f,
-                            SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1")
+                            SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
+                            SizeName = "52 (XL)",
+                            TitleImagePath = "Products/Lacoste/Pants/3.jpg"
                         },
                         new
                         {
                             Id = new Guid("16179e73-8390-432a-8b7c-be073ab6dc12"),
                             BrandId = new Guid("e3927a70-e055-4e6c-a4fa-e10308a78a7d"),
-                            Count = 6,
-                            Name = "Футболка мужская",
+                            BrandName = "Nike",
+                            ClothingTypeId = new Guid("da3a3156-3593-4f37-a89d-293e126915c6"),
+                            ClothingTypeName = "Blouse",
+                            Count = 0,
+                            Name = "Кофта мужская",
                             Price = 4470f,
-                            SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1")
+                            SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
+                            SizeName = "52 (XL)",
+                            TitleImagePath = "Products/Nike/Blouse/4.jpg"
                         },
                         new
                         {
                             Id = new Guid("d6d60425-d2fd-4f8b-8e1b-f7c9def4a7ac"),
                             BrandId = new Guid("f0e9fd9d-67fe-4f99-ace4-7b403c57ab46"),
-                            Count = 5,
-                            Name = "Мужская олимпийка Adicolor Classics Beckenbauer Primeblue",
+                            BrandName = "Adidas",
+                            ClothingTypeId = new Guid("a8080577-5efb-4339-867a-8ba2129ae766"),
+                            ClothingTypeName = "Sweater",
+                            Count = 8,
+                            Name = "Cвитер Adicolor Classics Beckenbauer Primeblue",
                             Price = 7690f,
-                            SizeId = new Guid("e3437214-5c5c-411b-84ca-9015f4804e74")
+                            SizeId = new Guid("e3437214-5c5c-411b-84ca-9015f4804e74"),
+                            SizeName = "54 (XXL)",
+                            TitleImagePath = "Products/Adidas/Sweater/5.jpg"
                         });
                 });
 
@@ -335,12 +418,51 @@ namespace ClothingStore.Migrations
 
             modelBuilder.Entity("ClothingStore.Domain.Entities.Product", b =>
                 {
+                    b.HasOne("ClothingStore.Domain.Entities.Brand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ClothingStore.Domain.Entities.ClothingType", "ClothingType")
+                        .WithMany("Products")
+                        .HasForeignKey("ClothingTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ClothingStore.Domain.Entities.OnlineOrder", null)
                         .WithMany("Products")
                         .HasForeignKey("OnlineOrderId");
+
+                    b.HasOne("ClothingStore.Domain.Entities.Size", "Size")
+                        .WithMany("Products")
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("ClothingType");
+
+                    b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("ClothingStore.Domain.Entities.Brand", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ClothingStore.Domain.Entities.ClothingType", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("ClothingStore.Domain.Entities.OnlineOrder", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ClothingStore.Domain.Entities.Size", b =>
                 {
                     b.Navigation("Products");
                 });

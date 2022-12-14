@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClothingStore.Domain.Entities.Product>
+﻿@model ProductListViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -7,6 +7,16 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="Products" asp-action="Create">Create New</a>
 </p>
-@Model.
+<ul>
+    @foreach (var entity in Model.Products)
+    {
+        <li>
+            <img src="~/images/@entity.TitleImagePath" alt="" class="left UlImage">
+            <p>@entity.Name</p>
+            <p>@entity.Brand</p>
+            <p>@entity.Count</p>
+        </li>
+    }
+</ul>

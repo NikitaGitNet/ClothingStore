@@ -10,5 +10,6 @@ namespace ClothingStore.Domain.Entities
         [Display(Name = "Страна производитель")]
         public string? ManufacturerCountry { get; set; }
         public string? TitleImagePath { get; set; }
+        public ICollection<Product>? Products { get; set; }
     }
 }

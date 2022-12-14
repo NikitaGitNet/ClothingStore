@@ -1,5 +1,9 @@
 ﻿<!DOCTYPE HTML>
 <html>
+	@if (IsSectionDefined("scripts"))
+	{
+		RenderSection("scripts");
+	}
 	<head>
 		@await Html.PartialAsync("MetatagsPartial")
 		@await Html.PartialAsync("CssPartial")

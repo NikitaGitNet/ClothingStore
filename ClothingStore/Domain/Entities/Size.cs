@@ -13,5 +13,6 @@ namespace ClothingStore.Domain.Entities
         public string? WaistCircumference { get; set; }
         [Display(Name = "Обхват бедер")]
         public string? HipCircumference { get; set; }
+        public ICollection<Product>? Products { get; set; }
     }
 }

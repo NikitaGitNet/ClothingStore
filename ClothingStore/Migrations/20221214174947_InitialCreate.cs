@@ -28,6 +28,18 @@ namespace ClothingStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ClothingTypes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClothingTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -112,21 +124,43 @@ namespace ClothingStore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SizeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
                     TitleImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SizeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SizeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BrandName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClothingTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ClothingTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OnlineOrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Products_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_ClothingTypes_ClothingTypeId",
+                        column: x => x.ClothingTypeId,
+                        principalTable: "ClothingTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Products_OnlineOrders_OnlineOrderId",
                         column: x => x.OnlineOrderId,
                         principalTable: "OnlineOrders",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Products_Sizes_SizeId",
+                        column: x => x.SizeId,
+                        principalTable: "Sizes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -142,15 +176,15 @@ namespace ClothingStore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "BrandId", "Count", "Name", "OnlineOrderId", "Price", "SizeId", "TitleImagePath" },
+                table: "ClothingTypes",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("16179e73-8390-432a-8b7c-be073ab6dc12"), new Guid("e3927a70-e055-4e6c-a4fa-e10308a78a7d"), 6, "Футболка мужская", null, 4470f, new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"), null },
-                    { new Guid("80cee191-9b30-4830-9f9f-58cb88057b96"), new Guid("457966e8-26e4-489b-978a-f903a07d3533"), 0, "Мужские брюки Sport Fleece Tennis", null, 12690f, new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"), null },
-                    { new Guid("93a85753-c130-455f-83ec-6a90d3970d72"), new Guid("4d89fc13-6268-464f-8ecf-57acc7427b64"), 0, "Куртка", null, 30000f, new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"), null },
-                    { new Guid("aef66f8c-f6c5-4f4a-abf2-b31b89c25b51"), new Guid("7efc9710-ed9f-460c-b29f-617a4a784269"), 9, "Хлопковая сорочкаавава", null, 29100f, new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"), "Products/Ralph Lauren/Shirts/1.jpg" },
-                    { new Guid("d6d60425-d2fd-4f8b-8e1b-f7c9def4a7ac"), new Guid("f0e9fd9d-67fe-4f99-ace4-7b403c57ab46"), 5, "Мужская олимпийка Adicolor Classics Beckenbauer Primeblue", null, 7690f, new Guid("e3437214-5c5c-411b-84ca-9015f4804e74"), null }
+                    { new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"), "Jacket" },
+                    { new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"), "Shirt" },
+                    { new Guid("726eb9ac-be00-4e75-b328-d732d433d432"), "Pants" },
+                    { new Guid("a8080577-5efb-4339-867a-8ba2129ae766"), "Sweater" },
+                    { new Guid("da3a3156-3593-4f37-a89d-293e126915c6"), "Blouse" }
                 });
 
             migrationBuilder.InsertData(
@@ -166,18 +200,42 @@ namespace ClothingStore.Migrations
                     { new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"), "96-102", "92-98", "48 (M)", "82-90" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "BrandId", "BrandName", "ClothingTypeId", "ClothingTypeName", "Count", "Name", "OnlineOrderId", "Price", "SizeId", "SizeName", "TitleImagePath" },
+                values: new object[,]
+                {
+                    { new Guid("16179e73-8390-432a-8b7c-be073ab6dc12"), new Guid("e3927a70-e055-4e6c-a4fa-e10308a78a7d"), "Nike", new Guid("da3a3156-3593-4f37-a89d-293e126915c6"), "Blouse", 0, "Кофта мужская", null, 4470f, new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"), "52 (XL)", "Products/Nike/Blouse/4.jpg" },
+                    { new Guid("80cee191-9b30-4830-9f9f-58cb88057b96"), new Guid("457966e8-26e4-489b-978a-f903a07d3533"), "Lacoste", new Guid("726eb9ac-be00-4e75-b328-d732d433d432"), "Pants", 0, "Мужские брюки Sport Fleece Tennis", null, 12690f, new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"), "52 (XL)", "Products/Lacoste/Pants/3.jpg" },
+                    { new Guid("93a85753-c130-455f-83ec-6a90d3970d72"), new Guid("4d89fc13-6268-464f-8ecf-57acc7427b64"), "Stone Island", new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"), "Jacket", 8, "Куртка", null, 30000f, new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"), "48 (M)", "Products/Stone Island/Jacket/2.jpg" },
+                    { new Guid("aef66f8c-f6c5-4f4a-abf2-b31b89c25b51"), new Guid("7efc9710-ed9f-460c-b29f-617a4a784269"), "Ralph Lauren", new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"), "Shirt", 0, "Хлопковая сорочка", null, 29100f, new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"), "50 (L)", "Products/Ralph Lauren/Shirt/1.jpg" },
+                    { new Guid("d6d60425-d2fd-4f8b-8e1b-f7c9def4a7ac"), new Guid("f0e9fd9d-67fe-4f99-ace4-7b403c57ab46"), "Adidas", new Guid("a8080577-5efb-4339-867a-8ba2129ae766"), "Sweater", 8, "Cвитер Adicolor Classics Beckenbauer Primeblue", null, 7690f, new Guid("e3437214-5c5c-411b-84ca-9015f4804e74"), "54 (XXL)", "Products/Adidas/Sweater/5.jpg" }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_BrandId",
+                table: "Products",
+                column: "BrandId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ClothingTypeId",
+                table: "Products",
+                column: "ClothingTypeId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Products_OnlineOrderId",
                 table: "Products",
                 column: "OnlineOrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_SizeId",
+                table: "Products",
+                column: "SizeId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Brands");
-
             migrationBuilder.DropTable(
                 name: "Customers");
 
@@ -191,10 +249,16 @@ namespace ClothingStore.Migrations
                 name: "Sales");
 
             migrationBuilder.DropTable(
-                name: "Sizes");
+                name: "Brands");
+
+            migrationBuilder.DropTable(
+                name: "ClothingTypes");
 
             migrationBuilder.DropTable(
                 name: "OnlineOrders");
+
+            migrationBuilder.DropTable(
+                name: "Sizes");
         }
     }
 }
