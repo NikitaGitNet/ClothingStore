@@ -9,14 +9,18 @@
 <p>
     <a asp-controller="Products" asp-action="Create">Create New</a>
 </p>
-<ul>
+<div class="productList" >
+    <ul>
     @foreach (var entity in Model.Products)
     {
         <li>
-            <img src="~/images/@entity.TitleImagePath" alt="" class="left UlImage">
-            <p>@entity.Name</p>
-            <p>@entity.Brand</p>
-            <p>@entity.Count</p>
+            <div>
+                <img src="~/images/@entity.TitleImagePath" alt="">
+                <p>@entity.Name</p>
+                <p>@entity.Brand</p>
+                <p>@entity.Count</p>
+            </div>
         </li>
     }
 </ul>
+</div>
