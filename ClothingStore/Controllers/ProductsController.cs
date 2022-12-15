@@ -32,7 +32,8 @@ namespace ClothingStore.Controllers
                     Name = product.Name,
                     TitleImagePath = product.TitleImagePath,
                     Brand = product.BrandName,
-                    ClothingType = product.ClothingTypeName
+                    ClothingType = product.ClothingTypeName,
+                    Price = product.Price
                 };
                 viewModels.Add(model);
             }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClothingStore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221214174947_InitialCreate")]
+    [Migration("20221215162747_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -49,31 +49,36 @@ namespace ClothingStore.Migrations
                         {
                             Id = new Guid("e3927a70-e055-4e6c-a4fa-e10308a78a7d"),
                             ManufacturerCountry = "USA",
-                            Name = "Nike"
+                            Name = "Nike",
+                            TitleImagePath = "Brands/2.png"
                         },
                         new
                         {
                             Id = new Guid("f0e9fd9d-67fe-4f99-ace4-7b403c57ab46"),
                             ManufacturerCountry = "Germany",
-                            Name = "Adidas"
+                            Name = "Adidas",
+                            TitleImagePath = "Brands/3.png"
                         },
                         new
                         {
                             Id = new Guid("7efc9710-ed9f-460c-b29f-617a4a784269"),
                             ManufacturerCountry = "USA",
-                            Name = "Ralph Lauren"
+                            Name = "Ralph Lauren",
+                            TitleImagePath = "Brands/3.png"
                         },
                         new
                         {
                             Id = new Guid("4d89fc13-6268-464f-8ecf-57acc7427b64"),
                             ManufacturerCountry = "Italy",
-                            Name = "Stone Island"
+                            Name = "Stone Island",
+                            TitleImagePath = "Brands/5.png"
                         },
                         new
                         {
                             Id = new Guid("457966e8-26e4-489b-978a-f903a07d3533"),
                             ManufacturerCountry = "France",
-                            Name = "Lacoste"
+                            Name = "Lacoste",
+                            TitleImagePath = "Brands/4.jpg"
                         });
                 });
 
@@ -258,7 +263,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Ralph Lauren",
                             ClothingTypeId = new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"),
                             ClothingTypeName = "Shirt",
-                            Count = 0,
+                            Count = 1,
                             Name = "Хлопковая сорочка",
                             Price = 29100f,
                             SizeId = new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"),
@@ -272,7 +277,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Stone Island",
                             ClothingTypeId = new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"),
                             ClothingTypeName = "Jacket",
-                            Count = 8,
+                            Count = 1,
                             Name = "Куртка",
                             Price = 30000f,
                             SizeId = new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"),
@@ -286,7 +291,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Lacoste",
                             ClothingTypeId = new Guid("726eb9ac-be00-4e75-b328-d732d433d432"),
                             ClothingTypeName = "Pants",
-                            Count = 0,
+                            Count = 6,
                             Name = "Мужские брюки Sport Fleece Tennis",
                             Price = 12690f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
@@ -300,12 +305,12 @@ namespace ClothingStore.Migrations
                             BrandName = "Nike",
                             ClothingTypeId = new Guid("da3a3156-3593-4f37-a89d-293e126915c6"),
                             ClothingTypeName = "Blouse",
-                            Count = 0,
+                            Count = 4,
                             Name = "Кофта мужская",
                             Price = 4470f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
                             SizeName = "52 (XL)",
-                            TitleImagePath = "Products/Nike/Blouse/4.jpg"
+                            TitleImagePath = "Products/Nike/Blouse/4.jpeg"
                         },
                         new
                         {
@@ -319,7 +324,7 @@ namespace ClothingStore.Migrations
                             Price = 7690f,
                             SizeId = new Guid("e3437214-5c5c-411b-84ca-9015f4804e74"),
                             SizeName = "54 (XXL)",
-                            TitleImagePath = "Products/Adidas/Sweater/5.jpg"
+                            TitleImagePath = "Products/Adidas/Sweater/5.jpeg"
                         });
                 });
 
