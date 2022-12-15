@@ -3227,6 +3227,13 @@ body.is-mobile.landing #footer {
   background-color: #1d242a;
 }
 .productList {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.productList p{
+    margin: 0;
 }
 .productList ul{
     column-count: 2;
@@ -3237,4 +3244,13 @@ body.is-mobile.landing #footer {
     transform: rotate(2deg);
     border: 3px solid #222;
     height: 500px;
+}
+.header_space{
+    height: 3em;
+}
+.produktcard {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
