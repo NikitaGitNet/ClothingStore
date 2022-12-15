@@ -9,5 +9,6 @@
         public string? TitleImagePath { get; set; }
         public string? Brand { get; set; }
         public string? ClothingType { get; set; }
+        public string? SizeName { get; set; }
     }
 }

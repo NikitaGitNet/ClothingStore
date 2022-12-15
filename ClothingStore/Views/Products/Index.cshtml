@@ -1,5 +1,4 @@
 ﻿@model ProductListViewModel
-
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,7 +8,7 @@
 <p>
     <a asp-controller="Products" asp-action="Create">Create New</a>
 </p>
-<div class="productList" >
+<div class="productList">
     @foreach (var entity in Model.Products)
     {
             <div class="produktcard">

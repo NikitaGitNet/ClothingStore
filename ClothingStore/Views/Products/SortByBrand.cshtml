@@ -1,0 +1,12 @@
+﻿@using ClothingStore.Models.Brands
+@model BrandListViewModel
+<ul>
+    @foreach (var brand in Model.Brands)
+    {
+        <li>
+            <a>@brand.TitleImagePath</a>
+            <p>@brand.Name</p>
+            <p>@brand.ManufacturerCountry</p>
+        </li>
+    }
+</ul>

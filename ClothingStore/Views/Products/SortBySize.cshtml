@@ -1,0 +1,13 @@
+﻿@using ClothingStore.Models.Sizes
+@model SizeListViewModel
+<ul>
+    @foreach (var size in Model.Sizes)
+    {
+        <li>
+            <a>@size.Name</a>
+            <p>Обхват груди @size.ChestCircumference</p>
+            <p>Обхват талии @size.WaistCircumference</p>
+            <p>Обхват бёдер @size.HipCircumference</p>
+        </li>
+    }
+</ul>
