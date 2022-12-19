@@ -1,10 +1,9 @@
-﻿@using ClothingStore.Models.Brands
-@model BrandListViewModel
+﻿@model BrandListViewModel
 <ul>
     @foreach (var brand in Model.Brands)
     {
         <li>
-            <a>@brand.TitleImagePath</a>
+            <img src="~/images/@brand.TitleImagePath" alt="">
             <p>@brand.Name</p>
             <p>@brand.ManufacturerCountry</p>
         </li>

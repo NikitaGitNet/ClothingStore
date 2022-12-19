@@ -5,8 +5,11 @@
 
 <div class="header_space"></div>
 
+<h2>Сортировать по: </h2>
 <p>
-    <a asp-controller="Products" asp-action="Create">Create New</a>
+    <a asp-controller="Products" asp-action="SortByBrand">Бренду</a>
+    <a asp-controller="Products" asp-action="SortBySize">Размеру</a>
+    <a asp-controller="Products" asp-action="SortByPrise">Цене</a>
 </p>
 <div class="productList">
     @foreach (var entity in Model.Products)

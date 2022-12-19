@@ -9,6 +9,8 @@ using ClothingStore.Domain;
 using ClothingStore.Domain.Entities;
 using ClothingStore.Model.Products;
 using ClothingStore.Models.Price;
+using ClothingStore.Models.Brands;
+using ClothingStore.Models.Sizes;
 
 namespace ClothingStore.Controllers
 {
@@ -42,71 +44,110 @@ namespace ClothingStore.Controllers
         }
         public async Task<IActionResult> SortByBrand(Guid brandId)
         {
-            List<Product>? products = await _context.Products.ToListAsync();
-            var sortProducts = from product in products where product.BrandId == brandId select product;
-            List<ProductViewModel> viewModels = new();
-            foreach (var model in sortProducts)
+            if (brandId != default)
             {
-                ProductViewModel viewModel = new()
-                { 
-                    Id = model.Id,
-                    Name = model.Name,
-                    Price = model.Price,
-                    Brand = model.BrandName,
-                    Count = model.Count,
-                    TitleImagePath = model.TitleImagePath,
-                    ClothingType = model.ClothingTypeName,
-                    SizeName = model.SizeName
-                };
-                viewModels.Add(viewModel);
+                List<Product>? products = await _context.Products.ToListAsync();
+                var sortProducts = from product in products where product.BrandId == brandId select product;
+                List<ProductViewModel> viewModels = new();
+                foreach (var model in sortProducts)
+                {
+                    ProductViewModel viewModel = new()
+                    {
+                        Id = model.Id,
+                        Name = model.Name,
+                        Price = model.Price,
+                        Brand = model.BrandName,
+                        Count = model.Count,
+                        TitleImagePath = model.TitleImagePath,
+                        ClothingType = model.ClothingTypeName,
+                        SizeName = model.SizeName
+                    };
+                    viewModels.Add(viewModel);
+                }
+                return View("Index", new ProductListViewModel { Products = viewModels });
             }
-            return View(new ProductListViewModel {Products = viewModels });
+            List<Brand> brands = await _context.Brands.ToListAsync();
+            List<BrandViewModel> brandList = new();
+            foreach (var brand in brands)
+            {
+                BrandViewModel model = new()
+                { 
+                    Id = brand.Id,
+                    ManufacturerCountry = brand.ManufacturerCountry,
+                    Name = brand.Name,
+                    TitleImagePath = brand.TitleImagePath
+                };
+                brandList.Add(model);
+            }
+            return View(new BrandListViewModel {Brands=brandList });
         }
         public async Task<IActionResult> SortBySize(Guid sizeId)
         {
-            List<Product>? products = await _context.Products.ToListAsync();
-            var sortProducts = from product in products where product.SizeId == sizeId select product;
-            List<ProductViewModel> viewModels = new();
-            foreach (var model in sortProducts)
+            if (sizeId != default)
             {
-                ProductViewModel viewModel = new()
+                List<Product>? products = await _context.Products.ToListAsync();
+                var sortProducts = from product in products where product.SizeId == sizeId select product;
+                List<ProductViewModel> viewModels = new();
+                foreach (var model in sortProducts)
                 {
-                    Id = model.Id,
-                    Name = model.Name,
-                    Price = model.Price,
-                    Brand = model.BrandName,
-                    Count = model.Count,
-                    TitleImagePath = model.TitleImagePath,
-                    ClothingType = model.ClothingTypeName,
-                    SizeName = model.SizeName
-                };
-                viewModels.Add(viewModel);
+                    ProductViewModel viewModel = new()
+                    {
+                        Id = model.Id,
+                        Name = model.Name,
+                        Price = model.Price,
+                        Brand = model.BrandName,
+                        Count = model.Count,
+                        TitleImagePath = model.TitleImagePath,
+                        ClothingType = model.ClothingTypeName,
+                        SizeName = model.SizeName
+                    };
+                    viewModels.Add(viewModel);
+                }
+                return View("Index", new ProductListViewModel { Products = viewModels });
             }
-            return View(new ProductListViewModel { Products = viewModels });
+            List<Size> sizes = await _context.Sizes.ToListAsync();
+            List<SizeViewModel> sizeList = new();
+            foreach (var size in sizes)
+            {
+                SizeViewModel model = new()
+                {
+                    Id = size.Id,
+                    ChestCircumference = size.ChestCircumference,
+                    HipCircumference = size.HipCircumference,
+                    WaistCircumference = size.WaistCircumference,
+                    Name = size.Name
+                };
+                sizeList.Add(model);
+            }
+            return View(new SizeListViewModel { Sizes = sizeList });
         }
         public async Task<IActionResult> SortByPrise(PriceViewModel price)
         {
-            List<Product>? products = await _context.Products.ToListAsync();
-            var sortProducts = from product in products where product.Price > price.MinPrice && product.Price < price.MaxPrice orderby product.Price select product;
-            List<ProductViewModel> viewModels = new();
-            foreach (var model in sortProducts)
+            if (price != default)
             {
-                ProductViewModel viewModel = new()
+                List<Product>? products = await _context.Products.ToListAsync();
+                var sortProducts = from product in products where product.Price > price.MinPrice && product.Price < price.MaxPrice orderby product.Price select product;
+                List<ProductViewModel> viewModels = new();
+                foreach (var model in sortProducts)
                 {
-                    Id = model.Id,
-                    Name = model.Name,
-                    Price = model.Price,
-                    Brand = model.BrandName,
-                    Count = model.Count,
-                    TitleImagePath = model.TitleImagePath,
-                    ClothingType = model.ClothingTypeName,
-                    SizeName = model.SizeName
-                };
-                viewModels.Add(viewModel);
+                    ProductViewModel viewModel = new()
+                    {
+                        Id = model.Id,
+                        Name = model.Name,
+                        Price = model.Price,
+                        Brand = model.BrandName,
+                        Count = model.Count,
+                        TitleImagePath = model.TitleImagePath,
+                        ClothingType = model.ClothingTypeName,
+                        SizeName = model.SizeName
+                    };
+                    viewModels.Add(viewModel);
+                }
+                return View("Index" ,new ProductListViewModel { Products = viewModels });
             }
-            return View(new ProductListViewModel { Products = viewModels });
+            return View();
         }
-        public async Task<IActionResult> SortByCoutn(int count)
+        public async Task<IActionResult> SortByCount(int count)
         {
             List<Product>? products = await _context.Products.ToListAsync();
             var sortProducts = from product in products where product.Count > count select product;
@@ -126,7 +167,7 @@ namespace ClothingStore.Controllers
                 };
                 viewModels.Add(viewModel);
             }
-            return View(new ProductListViewModel { Products = viewModels });
+            return View("Index", new ProductListViewModel { Products = viewModels });
         }
         public async Task<IActionResult> Details(Guid? id)
         {
