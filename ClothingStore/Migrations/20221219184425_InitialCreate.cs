@@ -3,14 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace ClothingStore.Migrations
 {
-    /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -89,21 +85,6 @@ namespace ClothingStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sales",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    DateOfSale = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sales", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sizes",
                 columns: table => new
                 {
@@ -116,6 +97,27 @@ namespace ClothingStore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sizes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sales",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EmployeeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    DateOfSale = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sales", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sales_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,7 +135,8 @@ namespace ClothingStore.Migrations
                     BrandName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClothingTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClothingTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OnlineOrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    OnlineOrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SaleId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -154,6 +157,11 @@ namespace ClothingStore.Migrations
                         name: "FK_Products_OnlineOrders_OnlineOrderId",
                         column: x => x.OnlineOrderId,
                         principalTable: "OnlineOrders",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Products_Sales_SaleId",
+                        column: x => x.SaleId,
+                        principalTable: "Sales",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Products_Sizes_SizeId",
@@ -202,14 +210,14 @@ namespace ClothingStore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "BrandId", "BrandName", "ClothingTypeId", "ClothingTypeName", "Count", "Name", "OnlineOrderId", "Price", "SizeId", "SizeName", "TitleImagePath" },
+                columns: new[] { "Id", "BrandId", "BrandName", "ClothingTypeId", "ClothingTypeName", "Count", "Name", "OnlineOrderId", "Price", "SaleId", "SizeId", "SizeName", "TitleImagePath" },
                 values: new object[,]
                 {
-                    { new Guid("16179e73-8390-432a-8b7c-be073ab6dc12"), new Guid("e3927a70-e055-4e6c-a4fa-e10308a78a7d"), "Nike", new Guid("da3a3156-3593-4f37-a89d-293e126915c6"), "Blouse", 4, "Кофта мужская", null, 4470f, new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"), "52 (XL)", "Products/Nike/Blouse/4.jpeg" },
-                    { new Guid("80cee191-9b30-4830-9f9f-58cb88057b96"), new Guid("457966e8-26e4-489b-978a-f903a07d3533"), "Lacoste", new Guid("726eb9ac-be00-4e75-b328-d732d433d432"), "Pants", 6, "Мужские брюки Sport Fleece Tennis", null, 12690f, new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"), "52 (XL)", "Products/Lacoste/Pants/3.jpg" },
-                    { new Guid("93a85753-c130-455f-83ec-6a90d3970d72"), new Guid("4d89fc13-6268-464f-8ecf-57acc7427b64"), "Stone Island", new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"), "Jacket", 1, "Куртка", null, 30000f, new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"), "48 (M)", "Products/Stone Island/Jacket/2.jpg" },
-                    { new Guid("aef66f8c-f6c5-4f4a-abf2-b31b89c25b51"), new Guid("7efc9710-ed9f-460c-b29f-617a4a784269"), "Ralph Lauren", new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"), "Shirt", 1, "Хлопковая сорочка", null, 29100f, new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"), "50 (L)", "Products/Ralph Lauren/Shirt/1.jpg" },
-                    { new Guid("d6d60425-d2fd-4f8b-8e1b-f7c9def4a7ac"), new Guid("f0e9fd9d-67fe-4f99-ace4-7b403c57ab46"), "Adidas", new Guid("a8080577-5efb-4339-867a-8ba2129ae766"), "Sweater", 8, "Cвитер Adicolor Classics Beckenbauer Primeblue", null, 7690f, new Guid("e3437214-5c5c-411b-84ca-9015f4804e74"), "54 (XXL)", "Products/Adidas/Sweater/5.jpeg" }
+                    { new Guid("16179e73-8390-432a-8b7c-be073ab6dc12"), new Guid("e3927a70-e055-4e6c-a4fa-e10308a78a7d"), "Nike", new Guid("da3a3156-3593-4f37-a89d-293e126915c6"), "Blouse", 8, "Кофта мужская", null, 4470f, null, new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"), "52 (XL)", "Products/Nike/Blouse/4.jpeg" },
+                    { new Guid("80cee191-9b30-4830-9f9f-58cb88057b96"), new Guid("457966e8-26e4-489b-978a-f903a07d3533"), "Lacoste", new Guid("726eb9ac-be00-4e75-b328-d732d433d432"), "Pants", 4, "Мужские брюки Sport Fleece Tennis", null, 12690f, null, new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"), "52 (XL)", "Products/Lacoste/Pants/3.jpg" },
+                    { new Guid("93a85753-c130-455f-83ec-6a90d3970d72"), new Guid("4d89fc13-6268-464f-8ecf-57acc7427b64"), "Stone Island", new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"), "Jacket", 4, "Куртка", null, 30000f, null, new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"), "48 (M)", "Products/Stone Island/Jacket/2.jpg" },
+                    { new Guid("aef66f8c-f6c5-4f4a-abf2-b31b89c25b51"), new Guid("7efc9710-ed9f-460c-b29f-617a4a784269"), "Ralph Lauren", new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"), "Shirt", 8, "Хлопковая сорочка", null, 29100f, null, new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"), "50 (L)", "Products/Ralph Lauren/Shirt/1.jpg" },
+                    { new Guid("d6d60425-d2fd-4f8b-8e1b-f7c9def4a7ac"), new Guid("f0e9fd9d-67fe-4f99-ace4-7b403c57ab46"), "Adidas", new Guid("a8080577-5efb-4339-867a-8ba2129ae766"), "Sweater", 5, "Cвитер Adicolor Classics Beckenbauer Primeblue", null, 7690f, null, new Guid("e3437214-5c5c-411b-84ca-9015f4804e74"), "54 (XXL)", "Products/Adidas/Sweater/5.jpeg" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -228,25 +236,28 @@ namespace ClothingStore.Migrations
                 column: "OnlineOrderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_SaleId",
+                table: "Products",
+                column: "SaleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_SizeId",
                 table: "Products",
                 column: "SizeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sales_EmployeeId",
+                table: "Sales",
+                column: "EmployeeId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Employees");
-
-            migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Sales");
 
             migrationBuilder.DropTable(
                 name: "Brands");
@@ -258,7 +269,13 @@ namespace ClothingStore.Migrations
                 name: "OnlineOrders");
 
             migrationBuilder.DropTable(
+                name: "Sales");
+
+            migrationBuilder.DropTable(
                 name: "Sizes");
+
+            migrationBuilder.DropTable(
+                name: "Employees");
         }
     }
 }

@@ -17,10 +17,10 @@ namespace ClothingStore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "6.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("ClothingStore.Domain.Entities.Brand", b =>
                 {
@@ -231,6 +231,9 @@ namespace ClothingStore.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
+                    b.Property<Guid?>("SaleId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("SizeId")
                         .HasColumnType("uniqueidentifier");
 
@@ -248,6 +251,8 @@ namespace ClothingStore.Migrations
 
                     b.HasIndex("OnlineOrderId");
 
+                    b.HasIndex("SaleId");
+
                     b.HasIndex("SizeId");
 
                     b.ToTable("Products");
@@ -260,7 +265,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Ralph Lauren",
                             ClothingTypeId = new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"),
                             ClothingTypeName = "Shirt",
-                            Count = 1,
+                            Count = 8,
                             Name = "Хлопковая сорочка",
                             Price = 29100f,
                             SizeId = new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"),
@@ -274,7 +279,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Stone Island",
                             ClothingTypeId = new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"),
                             ClothingTypeName = "Jacket",
-                            Count = 1,
+                            Count = 4,
                             Name = "Куртка",
                             Price = 30000f,
                             SizeId = new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"),
@@ -288,7 +293,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Lacoste",
                             ClothingTypeId = new Guid("726eb9ac-be00-4e75-b328-d732d433d432"),
                             ClothingTypeName = "Pants",
-                            Count = 6,
+                            Count = 4,
                             Name = "Мужские брюки Sport Fleece Tennis",
                             Price = 12690f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
@@ -302,7 +307,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Nike",
                             ClothingTypeId = new Guid("da3a3156-3593-4f37-a89d-293e126915c6"),
                             ClothingTypeName = "Blouse",
-                            Count = 4,
+                            Count = 8,
                             Name = "Кофта мужская",
                             Price = 4470f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
@@ -316,7 +321,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Adidas",
                             ClothingTypeId = new Guid("a8080577-5efb-4339-867a-8ba2129ae766"),
                             ClothingTypeName = "Sweater",
-                            Count = 8,
+                            Count = 5,
                             Name = "Cвитер Adicolor Classics Beckenbauer Primeblue",
                             Price = 7690f,
                             SizeId = new Guid("e3437214-5c5c-411b-84ca-9015f4804e74"),
@@ -337,13 +342,15 @@ namespace ClothingStore.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("EmployeeName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Sales");
                 });
@@ -439,6 +446,10 @@ namespace ClothingStore.Migrations
                         .WithMany("Products")
                         .HasForeignKey("OnlineOrderId");
 
+                    b.HasOne("ClothingStore.Domain.Entities.Sale", null)
+                        .WithMany("Products")
+                        .HasForeignKey("SaleId");
+
                     b.HasOne("ClothingStore.Domain.Entities.Size", "Size")
                         .WithMany("Products")
                         .HasForeignKey("SizeId")
@@ -452,6 +463,17 @@ namespace ClothingStore.Migrations
                     b.Navigation("Size");
                 });
 
+            modelBuilder.Entity("ClothingStore.Domain.Entities.Sale", b =>
+                {
+                    b.HasOne("ClothingStore.Domain.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("ClothingStore.Domain.Entities.Brand", b =>
                 {
                     b.Navigation("Products");
@@ -463,6 +485,11 @@ namespace ClothingStore.Migrations
                 });
 
             modelBuilder.Entity("ClothingStore.Domain.Entities.OnlineOrder", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ClothingStore.Domain.Entities.Sale", b =>
                 {
                     b.Navigation("Products");
                 });

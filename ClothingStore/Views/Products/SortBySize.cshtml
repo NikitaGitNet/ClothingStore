@@ -1,10 +1,9 @@
-﻿@using ClothingStore.Models.Sizes
-@model SizeListViewModel
+﻿@model SizeListViewModel
 <ul>
     @foreach (var size in Model.Sizes)
     {
         <li>
-            <a>@size.Name</a>
+            <a class="evenboxinner" asp-controller="Products" asp-action="SortBySize" asp-route-id="@size.Id">@size.Name</a>
             <p>Обхват груди @size.ChestCircumference</p>
             <p>Обхват талии @size.WaistCircumference</p>
             <p>Обхват бёдер @size.HipCircumference</p>

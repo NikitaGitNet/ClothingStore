@@ -89,7 +89,7 @@ namespace ClothingStore.Domain
                 Id = new Guid(RalphLaurenTest.Id),
                 Name = RalphLaurenTest.Name,
                 ManufacturerCountry = RalphLaurenTest.ManufacturerCountry,
-                TitleImagePath = "Brands/3.png"
+                TitleImagePath = "Brands/1.jpg"
             },
             new Brand
             {

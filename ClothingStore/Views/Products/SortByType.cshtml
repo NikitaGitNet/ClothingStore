@@ -1,0 +1,10 @@
+﻿@model ClothingTypeListViewModel
+<ul>
+    @foreach (var type in Model.ClothingTypes)
+    {
+        <li>
+            <a class="evenboxinner" asp-controller="Products" asp-action="SortByType" asp-route-id="@type.Id">@type.Name</a>
+        </li>
+    }
+</ul>
+
