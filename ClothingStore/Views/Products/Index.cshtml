@@ -3,14 +3,14 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="header_space"></div>
 
-<h2>Сортировать по: </h2>
-<p>
-    <a asp-controller="Products" asp-action="SortByBrand">Бренду</a>
-    <a asp-controller="Products" asp-action="SortBySize">Размеру</a>
-    <a asp-controller="Products" asp-action="SortByPrise">Цене</a>
-</p>
+
+    <div class="sortirovka">
+        <h2>Сортировать по: </h2>
+            <a class="evenboxinner" asp-controller="Products" asp-action="SortByBrand">Бренду</a>
+            <a class="evenboxinner" asp-controller="Products" asp-action="SortBySize">Размеру</a>
+            <a class="evenboxinner" asp-controller="Products" asp-action="SortByPrise">Цене</a>
+    </div>
 <div class="productList">
     @foreach (var entity in Model.Products)
     {

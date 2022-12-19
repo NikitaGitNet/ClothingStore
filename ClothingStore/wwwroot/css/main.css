@@ -3950,8 +3950,25 @@ body.is-mobile.landing #footer {
     font-size: 25px;
     margin: 15px;
     padding: 0 5px;
-    float: right;
     background: #ddd;
     border: 1px solid #222;
     box-shadow: 3px 3px 0 #222;
+}
+
+.sortirovka{
+    margin: 1em 0 1em 0;
+}
+
+.brand_blok {
+    display: flex;
+    margin-bottom: 2em;
+    width: 17em;
+    justify-content: space-between;
+}
+.brand_blok p{
+    margin: 0;
+}
+.brand_img{
+    width:5em;
+    background-color: white;
 }

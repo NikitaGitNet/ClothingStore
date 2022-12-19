@@ -1,11 +1,13 @@
 ﻿@model BrandListViewModel
-<ul>
+<ul class="sort_blok">
     @foreach (var brand in Model.Brands)
     {
-        <li>
-            <img src="~/images/@brand.TitleImagePath" alt="">
+        <li class="brand_blok">
+            <div>
             <p>@brand.Name</p>
             <p>@brand.ManufacturerCountry</p>
+            </div>
+            <img class="brand_img"src="~/images/@brand.TitleImagePath" alt="">
         </li>
     }
 </ul>
