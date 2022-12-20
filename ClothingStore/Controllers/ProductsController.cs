@@ -122,9 +122,9 @@ namespace ClothingStore.Controllers
             }
             return View(new SizeListViewModel { Sizes = sizeList });
         }
-        public async Task<IActionResult> SortByPrise(PriceViewModel price)
+        public async Task<IActionResult> SortByPriсe(PriceViewModel price)
         {
-            if (price != default)
+            if (price.MaxPrice != default || price.MinPrice != default)
             {
                 List<Product>? products = await _context.Products.ToListAsync();
                 var sortProducts = from product in products where product.Price > price.MinPrice && product.Price < price.MaxPrice orderby product.Price select product;
