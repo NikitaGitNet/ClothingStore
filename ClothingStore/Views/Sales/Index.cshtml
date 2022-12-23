@@ -1,5 +1,25 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model SaleListViewModel
+<h2>Продажи</h2>
+<ul>
+    @foreach (var sale in Model.Sales)
+    {
+        <li>
+            <p>@sale.EmployeeName</p>
+            <p>@sale.DateOfSale</p>
+            <ul>
+                @foreach (var product in sale.Products)
+                {
+                    <li>
+                        <p>@product.ClothingTypeName</p>
+                        <p>@product.Name</p>
+                        <p>@product.Count</p>
+                        <p>@product.SizeName</p>
+                        <p>@product.BrandName</p>
+                        <p>@product.Price</p>
+                    </li>
+                }
+            </ul>
+            <p>@sale.Price</p>
+        </li>
+    }
+</ul>

@@ -6,9 +6,11 @@ namespace ClothingStore.Models.Sales
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }
-        public DateTime DateOfSale { get; set; }
+        public DateTime DateOfSale = DateTime.Now;
         public Guid EmployeeId { get; set; }
         public string? EmployeeName { get; set; }
-        public ICollection<Product>? Products { get; set; }
+        public float Price { get; set; }
+        public Guid ProductId { get; set; }
+        public string? ProductName { get; set; }
     }
 }

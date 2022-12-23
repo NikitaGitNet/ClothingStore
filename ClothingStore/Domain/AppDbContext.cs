@@ -1,6 +1,7 @@
 ﻿using ClothingStore.Domain.Entities;
 using ClothingStore.TestData.Brands;
 using ClothingStore.TestData.ClothingTypes;
+using ClothingStore.TestData.Employees;
 using ClothingStore.TestData.Sizes;
 using Microsoft.EntityFrameworkCore;
 
@@ -106,28 +107,28 @@ namespace ClothingStore.Domain
                 TitleImagePath = "Brands/4.jpg"
             });
 
-            builder.Entity<ClothingType>().HasData(new ClothingType 
-            { 
+            builder.Entity<ClothingType>().HasData(new ClothingType
+            {
                 Id = Shirt.Id,
                 Name = Shirt.Name
             },
-            new ClothingType 
-            { 
+            new ClothingType
+            {
                 Id = Jacket.Id,
-                Name= Jacket.Name,
+                Name = Jacket.Name,
             },
-            new ClothingType 
-            { 
+            new ClothingType
+            {
                 Id = Pants.Id,
                 Name = Pants.Name
             },
-            new ClothingType 
-            { 
+            new ClothingType
+            {
                 Id = Sweater.Id,
                 Name = Sweater.Name
             },
-            new ClothingType 
-            { 
+            new ClothingType
+            {
                 Id = Blouse.Id,
                 Name = Blouse.Name,
             });
@@ -158,7 +159,7 @@ namespace ClothingStore.Domain
                 Price = 30000,
                 TitleImagePath = "Products/Stone Island/Jacket/2.jpg",
                 ClothingTypeId = Jacket.Id,
-                ClothingTypeName = Jacket.Name
+                ClothingTypeName = Jacket.Name,
             },
             new Product
             {
@@ -201,6 +202,88 @@ namespace ClothingStore.Domain
                 ClothingTypeId = Sweater.Id,
                 ClothingTypeName = Sweater.Name,
                 TitleImagePath = "Products/Adidas/Sweater/5.jpeg"
+            },
+            new Product
+            {
+                Id = new Guid("6998cd87-b0b3-43af-918e-a20e9c3a1b8d"),
+                Count = new Random().Next(10),
+                Name = "Adidas Classics Beckenbauer Primeblue",
+                BrandId = new Guid(AdidasTest.Id),
+                BrandName = AdidasTest.Name,
+                SizeId = new Guid(SizeXS.Id),
+                SizeName = SizeXS.Name,
+                Price = 7990,
+                ClothingTypeId = Pants.Id,
+                ClothingTypeName = Pants.Name,
+                TitleImagePath = "Products/Adidas/Sweater/adidas_pants.jpg"
+            },
+            new Product
+            {
+                Id = new Guid("c6312117-bd11-4a7a-afed-42cec57af355"),
+                Count = new Random().Next(10),
+                Name = "STONE ISLAND Хлопковый джемпер",
+                BrandId = new Guid(StoneIslandTest.Id),
+                BrandName = StoneIslandTest.Name,
+                SizeId = new Guid(SizeS.Id),
+                SizeName = SizeS.Name,
+                Price = 26600,
+                ClothingTypeId = Sweater.Id,
+                ClothingTypeName = Sweater.Name,
+                TitleImagePath = "Products/Stone Island/Sweater/StoneIsland_Sweater.jpg"
+            },
+            new Product
+            {
+                Id = new Guid("6df63604-d3f4-4c52-860c-da5c1f8b6ebc"),
+                Count = new Random().Next(10),
+                Name = "Рубашка Lacoste",
+                BrandId = new Guid(LacosteTest.Id),
+                BrandName = LacosteTest.Name,
+                SizeId = new Guid(SizeM.Id),
+                SizeName = SizeM.Name,
+                Price = 14980,
+                ClothingTypeId = Blouse.Id,
+                ClothingTypeName = Blouse.Name,
+                TitleImagePath = "Products/Lacoste/Blouse/Blouse_Lacost.jpg"
+            },
+            new Product
+            {
+                Id = new Guid("75b9937a-20c5-4308-8185-4585b5e4adbb"),
+                Count = new Random().Next(10),
+                Name = "Пуховик Nike NSW DWN Fill Wr Parka Hd Rus AO8915-045 SR",
+                BrandId = new Guid(NikeTest.Id),
+                BrandName = NikeTest.Name,
+                SizeId = new Guid(SizeL.Id),
+                SizeName = SizeL.Name,
+                Price = 10990,
+                ClothingTypeId = Jacket.Id,
+                ClothingTypeName = Jacket.Name,
+                TitleImagePath = "Products/Lacoste/Blouse/Blouse_Lacost.jpg"
+            },
+            new Product
+            {
+                Id = new Guid("1375b596-256b-490a-b21c-cf8f98a3634a"),
+                Count = new Random().Next(10),
+                Name = "БРЮКИ КОЖАНЫЕ RALPH LAUREN",
+                BrandId = new Guid(RalphLaurenTest.Id),
+                BrandName = RalphLaurenTest.Name,
+                SizeId = new Guid(SizeL.Id),
+                SizeName = SizeL.Name,
+                Price = 197750,
+                ClothingTypeId = Pants.Id,
+                ClothingTypeName = Pants.Name,
+                TitleImagePath = "Products/Ralph Lauren/Pants/RalphLauren_Pants.jpg"
+            });
+
+            builder.Entity<Employee>().HasData(new Employee 
+            { 
+                Id = new(GenaBukin.Id),
+                FirstName = GenaBukin.FirstName,
+                LastName = GenaBukin.LastName,
+                Bonus = GenaBukin.Bonus,
+                DateOfEmployment = GenaBukin.DateOfEmployment,
+                MiddleName = GenaBukin.MiddleName,
+                Post = GenaBukin.Post,
+                Tariff = GenaBukin.Tariff
             });
         }
     }
