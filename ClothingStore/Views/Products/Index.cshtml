@@ -19,7 +19,9 @@
                 <p>@entity.Name</p>
                 <p>@entity.Brand</p>
                 <p>@entity.Price рублей</p>
-                <input type="submit" class="evenboxinner" value="SALE">
+                <a asp-area="" asp-controller="Sales" asp-action="Sale" asp-route-id="@entity.Id">
+                    <input type="submit" class="evenboxinner" value="SALE">
+                </a>
             </div>
     }
 </div>

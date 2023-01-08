@@ -4,6 +4,7 @@ using ClothingStore.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClothingStore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230106154431_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,7 +263,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Ralph Lauren",
                             ClothingTypeId = new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"),
                             ClothingTypeName = "Shirt",
-                            Count = 6,
+                            Count = 5,
                             Name = "Хлопковая сорочка",
                             Price = 29100f,
                             SizeId = new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"),
@@ -274,7 +277,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Stone Island",
                             ClothingTypeId = new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"),
                             ClothingTypeName = "Jacket",
-                            Count = 0,
+                            Count = 3,
                             Name = "Куртка",
                             Price = 30000f,
                             SizeId = new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"),
@@ -288,7 +291,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Lacoste",
                             ClothingTypeId = new Guid("726eb9ac-be00-4e75-b328-d732d433d432"),
                             ClothingTypeName = "Pants",
-                            Count = 3,
+                            Count = 5,
                             Name = "Мужские брюки Sport Fleece Tennis",
                             Price = 12690f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
@@ -302,7 +305,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Nike",
                             ClothingTypeId = new Guid("da3a3156-3593-4f37-a89d-293e126915c6"),
                             ClothingTypeName = "Blouse",
-                            Count = 8,
+                            Count = 7,
                             Name = "Кофта мужская",
                             Price = 4470f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
@@ -316,7 +319,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Adidas",
                             ClothingTypeId = new Guid("a8080577-5efb-4339-867a-8ba2129ae766"),
                             ClothingTypeName = "Sweater",
-                            Count = 4,
+                            Count = 1,
                             Name = "Cвитер Adicolor Classics Beckenbauer Primeblue",
                             Price = 7690f,
                             SizeId = new Guid("e3437214-5c5c-411b-84ca-9015f4804e74"),
@@ -331,17 +334,17 @@ namespace ClothingStore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateOfSale")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleImagePath")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

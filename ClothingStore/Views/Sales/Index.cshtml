@@ -1,0 +1,21 @@
+﻿@model SaleListViewModel
+
+<h2>Продажи:</h2>
+<div class="productList">
+    <ul>
+        @foreach (var item in Model.Sales)
+        {
+            <li>
+                <div>
+                <img src="~/images/@item.TitleImagePath" alt="">
+                <p>@item.ProductName</p>
+                <p>Цена @item.Price рублей</p>
+                <p>Продавец @item.EmpolyeeName</p>
+                <a asp-controller="Sales" asp-action="Delete" asp-route-id="@item.Id">
+                    <input type="submit" class="evenboxinner" value="Удалить">
+                </a>
+            </div>
+            </li>
+        }
+    </ul>
+</div>
