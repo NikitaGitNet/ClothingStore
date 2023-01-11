@@ -10,6 +10,8 @@ namespace ClothingStore.Domain.Entities
         public float Price { get; set; }
         public string? TitleImagePath { get; set; }
 
+        ICollection<Sale>? Sales { get; set; }
+
         public Guid SizeId { get; set; }
         [ForeignKey("SizeId")]
         public Size? Size { get; set; }
@@ -24,5 +26,7 @@ namespace ClothingStore.Domain.Entities
         [ForeignKey("ClothingTypeId")]
         public string? ClothingTypeName { get; set; }
         public ClothingType? ClothingType { get; set; }
+
+        
     }
 }

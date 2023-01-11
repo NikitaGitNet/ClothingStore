@@ -2,12 +2,12 @@
 <ul class="sort_blok">
     @foreach (var brand in Model.Brands)
     {
-        <li class="brand_blok">
-            <div>
-            <p>@brand.Name</p>
-            <p>@brand.ManufacturerCountry</p>
-            </div>
-            <img class="brand_img"src="~/images/@brand.TitleImagePath" alt="">
-        </li>
+            <li class="brand_blok">
+                <div>
+                    <a class="evenboxinner" asp-controller="Products" asp-action="SortByBrand" asp-route-id="@brand.Id">@brand.Name</a>
+                    <p>@brand.ManufacturerCountry</p>
+                </div>
+                <img class="brand_img"src="~/images/@brand.TitleImagePath" alt="">
+            </li>
     }
 </ul>

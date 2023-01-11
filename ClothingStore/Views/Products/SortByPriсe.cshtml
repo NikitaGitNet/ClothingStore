@@ -1,0 +1,14 @@
+﻿@model PriceViewModel
+<form asp-controller="Products" asp-action="SortByPriсe"> 
+        <div class="form">
+            <h2>Минимальная цена</h2>
+            <div class="input-container ic1">
+                <input type="number" name="MinPrice" size="5" min="1" max="100000" value="1">
+            </div>
+            <h2>Максимальная цена</h2>
+            <div class="input-container ic2">
+                <input type="number" name="MaxPrice" size="5" min="1" max="100000" value="100000">
+            </div>
+            <input style="display: inline-block;" type="submit" class="evenboxinner" value="Найти">
+        </div>
+    </form>
