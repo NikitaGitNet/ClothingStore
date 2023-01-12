@@ -215,7 +215,7 @@ namespace ClothingStore.Domain
                 Price = 7990,
                 ClothingTypeId = Pants.Id,
                 ClothingTypeName = Pants.Name,
-                TitleImagePath = "Products/Adidas/Sweater/adidas_pants.jpg"
+                TitleImagePath = "Products/Adidas/Pants/adidas_pants.jpg"
             },
             new Product
             {

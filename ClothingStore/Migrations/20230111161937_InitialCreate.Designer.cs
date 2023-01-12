@@ -12,18 +12,17 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClothingStore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230106161401_AddSomeFields")]
-    partial class AddSomeFields
+    [Migration("20230111161937_InitialCreate")]
+    partial class InitialCreate
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "6.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("ClothingStore.Domain.Entities.Brand", b =>
                 {
@@ -64,7 +63,7 @@ namespace ClothingStore.Migrations
                             Id = new Guid("7efc9710-ed9f-460c-b29f-617a4a784269"),
                             ManufacturerCountry = "USA",
                             Name = "Ralph Lauren",
-                            TitleImagePath = "Brands/3.png"
+                            TitleImagePath = "Brands/1.jpg"
                         },
                         new
                         {
@@ -179,6 +178,19 @@ namespace ClothingStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e4bed810-c1f5-40d3-bf6f-cf537eddcfe9"),
+                            Bonus = 1000,
+                            DateOfEmployment = new DateTime(2015, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Генадий",
+                            LastName = "Букин",
+                            MiddleName = "Валентинович",
+                            Post = "Продавец обуви",
+                            Tariff = 1f
+                        });
                 });
 
             modelBuilder.Entity("ClothingStore.Domain.Entities.OnlineOrder", b =>
@@ -263,7 +275,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Ralph Lauren",
                             ClothingTypeId = new Guid("5b748d2f-e012-4150-b163-ad49a9b4c030"),
                             ClothingTypeName = "Shirt",
-                            Count = 6,
+                            Count = 7,
                             Name = "Хлопковая сорочка",
                             Price = 29100f,
                             SizeId = new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"),
@@ -277,7 +289,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Stone Island",
                             ClothingTypeId = new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"),
                             ClothingTypeName = "Jacket",
-                            Count = 0,
+                            Count = 4,
                             Name = "Куртка",
                             Price = 30000f,
                             SizeId = new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"),
@@ -291,7 +303,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Lacoste",
                             ClothingTypeId = new Guid("726eb9ac-be00-4e75-b328-d732d433d432"),
                             ClothingTypeName = "Pants",
-                            Count = 3,
+                            Count = 5,
                             Name = "Мужские брюки Sport Fleece Tennis",
                             Price = 12690f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
@@ -305,7 +317,7 @@ namespace ClothingStore.Migrations
                             BrandName = "Nike",
                             ClothingTypeId = new Guid("da3a3156-3593-4f37-a89d-293e126915c6"),
                             ClothingTypeName = "Blouse",
-                            Count = 8,
+                            Count = 1,
                             Name = "Кофта мужская",
                             Price = 4470f,
                             SizeId = new Guid("6650614b-a9ca-4d75-9407-1aa69a826ec1"),
@@ -319,12 +331,82 @@ namespace ClothingStore.Migrations
                             BrandName = "Adidas",
                             ClothingTypeId = new Guid("a8080577-5efb-4339-867a-8ba2129ae766"),
                             ClothingTypeName = "Sweater",
-                            Count = 4,
+                            Count = 1,
                             Name = "Cвитер Adicolor Classics Beckenbauer Primeblue",
                             Price = 7690f,
                             SizeId = new Guid("e3437214-5c5c-411b-84ca-9015f4804e74"),
                             SizeName = "54 (XXL)",
                             TitleImagePath = "Products/Adidas/Sweater/5.jpeg"
+                        },
+                        new
+                        {
+                            Id = new Guid("6998cd87-b0b3-43af-918e-a20e9c3a1b8d"),
+                            BrandId = new Guid("f0e9fd9d-67fe-4f99-ace4-7b403c57ab46"),
+                            BrandName = "Adidas",
+                            ClothingTypeId = new Guid("726eb9ac-be00-4e75-b328-d732d433d432"),
+                            ClothingTypeName = "Pants",
+                            Count = 7,
+                            Name = "Adidas Classics Beckenbauer Primeblue",
+                            Price = 7990f,
+                            SizeId = new Guid("152d81c0-363c-4f6c-9a17-5a4edd969fd6"),
+                            SizeName = "44 (XS)",
+                            TitleImagePath = "Products/Adidas/Sweater/adidas_pants.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("c6312117-bd11-4a7a-afed-42cec57af355"),
+                            BrandId = new Guid("4d89fc13-6268-464f-8ecf-57acc7427b64"),
+                            BrandName = "Stone Island",
+                            ClothingTypeId = new Guid("a8080577-5efb-4339-867a-8ba2129ae766"),
+                            ClothingTypeName = "Sweater",
+                            Count = 6,
+                            Name = "STONE ISLAND Хлопковый джемпер",
+                            Price = 26600f,
+                            SizeId = new Guid("6b4b71e1-ca7f-463e-ac67-16d32e00b0a7"),
+                            SizeName = "46 (S)",
+                            TitleImagePath = "Products/Stone Island/Sweater/StoneIsland_Sweater.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("6df63604-d3f4-4c52-860c-da5c1f8b6ebc"),
+                            BrandId = new Guid("457966e8-26e4-489b-978a-f903a07d3533"),
+                            BrandName = "Lacoste",
+                            ClothingTypeId = new Guid("da3a3156-3593-4f37-a89d-293e126915c6"),
+                            ClothingTypeName = "Blouse",
+                            Count = 6,
+                            Name = "Рубашка Lacoste",
+                            Price = 14980f,
+                            SizeId = new Guid("eecfb6cb-4f7f-4ca8-9dbc-ad18a0fbc7ff"),
+                            SizeName = "48 (M)",
+                            TitleImagePath = "Products/Lacoste/Blouse/Blouse_Lacost.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("75b9937a-20c5-4308-8185-4585b5e4adbb"),
+                            BrandId = new Guid("e3927a70-e055-4e6c-a4fa-e10308a78a7d"),
+                            BrandName = "Nike",
+                            ClothingTypeId = new Guid("301b068b-c740-4f8e-93c9-5f08885dcbe8"),
+                            ClothingTypeName = "Jacket",
+                            Count = 6,
+                            Name = "Пуховик Nike NSW DWN Fill Wr Parka Hd Rus AO8915-045 SR",
+                            Price = 10990f,
+                            SizeId = new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"),
+                            SizeName = "50 (L)",
+                            TitleImagePath = "Products/Lacoste/Blouse/Blouse_Lacost.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("1375b596-256b-490a-b21c-cf8f98a3634a"),
+                            BrandId = new Guid("7efc9710-ed9f-460c-b29f-617a4a784269"),
+                            BrandName = "Ralph Lauren",
+                            ClothingTypeId = new Guid("726eb9ac-be00-4e75-b328-d732d433d432"),
+                            ClothingTypeName = "Pants",
+                            Count = 2,
+                            Name = "БРЮКИ КОЖАНЫЕ RALPH LAUREN",
+                            Price = 197750f,
+                            SizeId = new Guid("74923a8e-621d-4d5a-8980-5985a3983d31"),
+                            SizeName = "50 (L)",
+                            TitleImagePath = "Products/Ralph Lauren/Pants/RalphLauren_Pants.jpg"
                         });
                 });
 
@@ -333,6 +415,12 @@ namespace ClothingStore.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EmployeeName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");

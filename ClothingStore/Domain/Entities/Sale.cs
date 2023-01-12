@@ -6,9 +6,9 @@ namespace ClothingStore.Domain.Entities
     public class Sale
     {
         public Guid Id { get; set; }
-        public string? EmployeeId = GenaBukin.Id;
+        public Guid EmployeeId { get; set; }
         [ForeignKey("EmployeeId")]
-        public string EmployeeName = GenaBukin.FirstName + " " + GenaBukin.LastName;
+        public string? EmployeeName { get; set; }
         public Guid ProductId { get; set; }
         [ForeignKey("ProductId")]
         public string? ProductName { get; set; }

@@ -9,8 +9,6 @@ using ClothingStore.Domain;
 using ClothingStore.Domain.Entities;
 using ClothingStore.Models.Sales;
 using ClothingStore.TestData.Employees;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ClothingStore.Controllers
 {
@@ -33,11 +31,11 @@ namespace ClothingStore.Controllers
                         Id = sale.Id,
                         EmployeeId = sale.EmployeeId,
                         DateOfSale = sale.DateOfSale,
-                    Price = sale.Price,
-                    ProductId = sale.ProductId,
-                    ProductName = sale.ProductName,
-                    TitleImagePath = sale.TitleImagePath,
-                    EmpolyeeName = sale.EmployeeName
+                        Price = sale.Price,
+                        ProductId = sale.ProductId,
+                        ProductName = sale.ProductName,
+                        TitleImagePath = sale.TitleImagePath,
+                        EmpolyeeName = sale.EmployeeName
                     };
                 salesViewModel.Add(model);
                 }
@@ -64,7 +62,7 @@ namespace ClothingStore.Controllers
         }
         public async Task<IActionResult> Delete(Guid Id)
         {
-            Sale sale = await _context.Sales.FindAsync(Id);
+            Sale? sale = await _context.Sales.FindAsync(Id);
             _context.Sales.Remove(sale);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(SalesController.Index));
