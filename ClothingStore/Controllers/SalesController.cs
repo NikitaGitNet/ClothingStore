@@ -1,4 +1,11 @@
-﻿using ClothingStore.Domain;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using ClothingStore.Domain;
 using ClothingStore.Domain.Entities;
 using ClothingStore.Models.Sales;
 using ClothingStore.TestData.Employees;
@@ -19,20 +26,21 @@ namespace ClothingStore.Controllers
         {
             List<Sale> sales = await _context.Sales.ToListAsync();
             List<SaleViewModel> salesViewModel = new();
-            foreach (var sale in sales)
-            {
-                SaleViewModel model = new()
-                { 
-                    Id = sale.Id,
-                    DateOfSale = sale.DateOfSale,
+                foreach (var sale in sales)
+                {
+                    SaleViewModel model = new()
+                    {
+                        Id = sale.Id,
+                        EmployeeId = sale.EmployeeId,
+                        DateOfSale = sale.DateOfSale,
                     Price = sale.Price,
                     ProductId = sale.ProductId,
                     ProductName = sale.ProductName,
                     TitleImagePath = sale.TitleImagePath,
                     EmpolyeeName = sale.EmployeeName
-                };
+                    };
                 salesViewModel.Add(model);
-            }
+                }
             return View(new SaleListViewModel { Sales = salesViewModel });
         }
         public async Task<IActionResult> Sale(Guid Id)
